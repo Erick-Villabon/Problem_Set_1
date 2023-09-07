@@ -3,13 +3,12 @@
 #                      Problem Set 1: Predicting Income                       #
 #                                                                             #
 #-----------------------------------------------------------------------------#
-
 #   Autores: -                                                    
 #            -   
 #            - 
 #            - 
 #
-#  Fecha: 0#/09/2023 
+#  Fecha: 18/09/2023 
 #
 #  Objetivo: Este código cargar los datos, para proceder a limpiarlos y 
 #  realizar las gráficas descriptivas de la base final.
@@ -42,7 +41,7 @@ for (j in 1:10) {
 # Edad -Sólo mayores de 18 años-
 
 GEIH <- rename(GEIH, c("edad" = "age"))
-GEIH <- GEIH[GEIH$age >= 18, ]
+GEIH <- GEIH[GEIH$edad >= 18, ]
 
 # Años de educación
 
@@ -171,4 +170,29 @@ estadisticas_todos <- data.frame(sapply(Descriptivas, function(x)
 write.xlsx(estadisticas_todos, file = "C:/Users/Erick/Desktop/Problem_Set_1/views/Descriptivas.xlsx")
 
 
+
+ggplot(GEIH, aes(x = salario_mensual)) +
+  geom_histogram(bins = 280, fill = "darkorchid4", alpha = 0.5) +
+  labs(x = "Salario nominal mensual", y = "Frecuencia") +
+  theme_minimal() +
+  scale_x_continuous(
+    labels = function(x) paste0("$", format(x, big.mark = ".", scientific = FALSE)),
+    limits = c(0, 13000000),
+    expand = c(0,0),
+    breaks = seq(0, 13000000, 1000000)
+  ) +
+  scale_y_continuous(
+    labels = function(x) format(x, big.mark = "."),
+    limits = c(0, 1000),
+    expand = c(0,0),
+    breaks = seq(0, 1000, 100)
+  ) +
+  theme(
+    text = element_text(size = 10),
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+    axis.text.y = element_text(angle = 0, vjust = 0.5, hjust = 1),
+    axis.line = element_line(color = "black"),
+    panel.grid = element_blank()
+    )
+ggsave("C:/Users/Erick/Desktop/Problem_Set_1/views/grafico1.png", width = 4.5, height = 2.5, dpi = 600)
 

@@ -4,7 +4,7 @@
 #                                                                             #
 #-----------------------------------------------------------------------------#
 
-#   Autores: -                                                   
+#   Autores: -                                                    
 #            -   
 #            - 
 #            - 
@@ -15,12 +15,12 @@
 #  realizar las gráficas descriptivas de la base final.
 #-----------------------------------------------------------------------------#
 
-# - Limpiar el environment y el panel
+# Limpiar el environment y el panel
 
 rm(list = ls())
 cat("\014")
 
-# - Librerias
+# Librerias
 
 library(pacman)
 p_load(rvest, tidyverse, ggplot2)
@@ -38,5 +38,21 @@ for (j in 1:10) {
   GEIH <- bind_rows(GEIH,temp)
 }
 
-# - 2. Limpieza de la base de datos
+# 2. Limpieza de la base de datos
+# Edad -Sólo mayores de 18 años-
+
+GEIH <- rename(GEIH, c("edad" = "age"))
+GEIH <- GEIH[GEIH$age >= 18, ]
+
+# Ingresos:
+
+  #Total
+
+GEIH <- rename(GEIH, c("ingreso_total" = "ingtot"))
+
+
+
+
+
+
 

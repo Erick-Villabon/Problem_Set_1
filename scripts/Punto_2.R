@@ -10,8 +10,8 @@
 #
 #  Fecha: 18/09/2023 
 #
-#  Objetivo: Este código cargar los datos, para proceder a limpiarlos y 
-#  realizar las gráficas descriptivas de la base final.
+#  Objetivo: Este código busca cargar los datos, para así proceder a limpiarlos
+#  y realizar las gráficas descriptivas de la base final.
 #-----------------------------------------------------------------------------#
 
 # Limpiar el environment y el panel

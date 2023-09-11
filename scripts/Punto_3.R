@@ -19,10 +19,12 @@
 require(pacman)
 p_load(tidyverse, skimr, stargazer, tidymodels, broom, knitr, kableExtra, boot)
 
+
 #### 1 - Regresion
 
 mod1<- lm(log_salario_m ~ edad+edad_2, data = GEIH, x=TRUE)
 stargazer(mod1, type="html", omit.stat=c("ser","f","adj.rsq"), out= "/Users/juandiego/Desktop/GitHub/Problem_Set_1/views/Regresion_3_1.html")
+
 
 #### 4.1 - Plot
 
@@ -58,15 +60,14 @@ for(i in 1:B){
   
   f<-lm(log_salario_m ~ edad+edad_2,db_sample)
   
-  coefs <- (f$coefficients[1]/ (2*f$coefficients[2]))
+  coefs <- -(f$coefficients[2]/ (2*f$coefficients[3]))
   
   estads[i]<-coefs #saves it in the above vector
 }
 
-length(estads)
-
 plot(hist(estads))
 
+#El valor maximo predicho:
 mean(estads)
 
 #El error estandar del estadistico sería:
@@ -76,12 +77,24 @@ sqrt(var(estads))
 quantile(estads,c(0.05,0.95))
 
 
+
 ##Con boot
-estads_fn<-function(data,index){
+estads_fn_2<-function(data,index){
+  fff<-lm(log_salario_m ~ edad+edad_2, data = GEIH, x=TRUE, subset = index)
   
-  (coef(lm(log_salario_m ~ edad+edad_2, data = data, subset = index))[1] )/ (2*(coef(lm(log_salario_m ~ edad+edad_2, data = data, subset = index))[2]))
+  coefss<-fff$coefficients
+  
+  b1<-coefss[2]
+  b2<-coefss[3] 
+  
+  estadistico<- -b1/(2*b2)
+  
+  
+  return(estadistico)
 }
 
 set.seed(777)
 
-boot(GEIH, estads_fn, R = 1000)
+resultados <- boot(data=GEIH, estads_fn_2,R=1000)
+resultados
+

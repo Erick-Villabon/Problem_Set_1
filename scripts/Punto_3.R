@@ -17,7 +17,7 @@
 
 # Librerias
 require(pacman)
-p_load(tidyverse, skimr, stargazer, tidymodels, broom, knitr, kableExtra, zoo, boot, RCurl, gdata, lmtest)
+p_load(tidyverse, skimr, stargazer, tidymodels, broom, knitr, kableExtra, zoo, boot, RCurl, gdata, lmtest, xtable)
 
 
 #### 1 - Regresion
@@ -37,7 +37,7 @@ stargazer(mod1,type = "text", omit.stat=c("ser","f","adj.rsq"), se = list(robust
 
 ##Prueba Heterocedasticidad
 bptest(mod1)
-
+#Sí hay heterocedasticidad
 
 #### 4.1 - Plot
 
@@ -75,7 +75,7 @@ for(i in 1:B){
   
   coefs <- -(f$coefficients[2]/ (2*f$coefficients[3]))
   
-  estads[i]<-coefs #saves it in the above vector
+  estads[i]<-coefs 
 }
 
 plot(hist(estads))
@@ -88,8 +88,12 @@ sqrt(var(estads))
 
 #Los intervalos de confianza serían los siguientes:
 quantile(estads,c(0.05,0.95))
+z <- quantile(estads,c(0.05,0.95))
+y <- data.frame(id=names(z), values=unname(z), stringsAsFactors=FALSE)
+y
 
-
+##Exportar Intervalo de Confianza
+print(xtable(y), type = "html",file = "/Users/juandiego/Desktop/GitHub/Problem_Set_1/views/Intconf1.html")
 
 ##Con boot
 estads_fn_2<-function(data,index){

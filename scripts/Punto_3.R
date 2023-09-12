@@ -17,13 +17,26 @@
 
 # Librerias
 require(pacman)
-p_load(tidyverse, skimr, stargazer, tidymodels, broom, knitr, kableExtra, boot)
+p_load(tidyverse, skimr, stargazer, tidymodels, broom, knitr, kableExtra, zoo, boot, RCurl, gdata, lmtest)
 
 
 #### 1 - Regresion
 
 mod1<- lm(log_salario_m ~ edad+edad_2, data = GEIH, x=TRUE)
 stargazer(mod1, type="html", omit.stat=c("ser","f","adj.rsq"), out= "/Users/juandiego/Desktop/GitHub/Problem_Set_1/views/Regresion_3_1.html")
+
+##Errores estandar robustos
+url_robust <- "https://raw.githubusercontent.com/IsidoreBeautrelet/economictheoryblog/master/robust_summary.R"
+eval(parse(text = getURL(url_robust, ssl.verifypeer = FALSE)),
+     envir=.GlobalEnv)
+
+summary(mod1, robust=T)
+
+robust_se <- as.vector(summary(mod1,robust = T)$coefficients[,"Std. Error"])
+stargazer(mod1,type = "text", omit.stat=c("ser","f","adj.rsq"), se = list(robust_se), out= "/Users/juandiego/Desktop/GitHub/Problem_Set_1/views/Regresion_3_2.html")
+
+##Prueba Heterocedasticidad
+bptest(mod1)
 
 
 #### 4.1 - Plot

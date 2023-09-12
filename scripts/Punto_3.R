@@ -39,6 +39,9 @@ summary(mod1, robust=T)
 robust_se <- as.vector(summary(mod1,robust = T)$coefficients[,"Std. Error"])
 stargazer(mod1,type = "text", omit.stat=c("ser","f","adj.rsq"), se = list(robust_se), out= "/Users/juandiego/Desktop/GitHub/Problem_Set_1/views/Regresion_3_2.html")
 
+##RMSE
+sqrt(mean(mod1$residuals^2))
+
 
 
 

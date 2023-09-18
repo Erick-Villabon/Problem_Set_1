@@ -3,21 +3,23 @@
 #                      Problem Set 1: Predicting Income                       #
 #                                                                             #
 #-----------------------------------------------------------------------------#
-#   Autores: -  Tania Reina 202015300                                                  
-#            -   
-#            - 
-#            - 
+#   Autores: -  Erick Julian Villabon - 201815677                                                  
+#            -  Juan Diego Duarte - 202011999  
+#            -  Carlos Torres Sandoval - 202225155
+#            -  Tania Reina - 202015300 
 #
 #  Fecha: 18/09/2023 
 #
 #  Objetivo: Realizar la regresión inicial, mostrar sus resultados e interpretar
+#Punto 3
 #-----------------------------------------------------------------------------#
 
 # Vamos a mantener el enviroment del punto 2 para realizar el punto 3
 
 # Librerias
 require(pacman)
-p_load(tidyverse, skimr, stargazer, tidymodels, broom, knitr, kableExtra, zoo, boot, RCurl, gdata, lmtest, xtable, sjPlot)
+p_load(tidyverse, skimr, stargazer, tidymodels, broom, knitr, kableExtra, zoo,
+       boot, RCurl, gdata, lmtest, xtable, sjPlot)
 
 
 ############# 1 - Regresion

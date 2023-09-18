@@ -86,6 +86,9 @@ GEIH$hijos_hogar <- ifelse(GEIH$p6050 == 3, 1, 0)
 GEIH$hijos_hogar[GEIH$p6050 != 3] <- 0
 GEIH$hijos_hogar[GEIH$p6050 == "."] <- NA
 
+# Interacciones
+GEIH$mujer_hijos_hogar<- GEIH$mujer*GEIH$hijos_hogar
+GEIH$mujer_amo_casa<- GEIH$mujer*GEIH$amo_casa
 # Primaria
 
 GEIH$primaria <- ifelse(GEIH$p6210 == 1, 1, 0)
@@ -114,6 +117,7 @@ GEIH <- GEIH[GEIH$oc == 1, ]
 # Experiencia trabajo actual
 
 GEIH <- rename(GEIH, c("exp_trab_actual" = "p6426"))
+GEIH$exp_trab_actual_2 <- GEIH$exp_trab_actual^2
 
 # Estrato
 

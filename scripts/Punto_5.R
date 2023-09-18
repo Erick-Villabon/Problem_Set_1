@@ -42,7 +42,7 @@ rec4<- recipe(log_salario_m~edad + mujer + hijos_hogar + horas_trab_usual +
 rec4
 
 rec5<- recipe(log_salario_m~edad + edad_2 + mujer + hijos_hogar + 
-                horas_trab_usual+ exp_trab_actual + exp_trab_actual_2, data = GEIH)
+                horas_trab_usual+ exp_trab_actual + exp_trab_actual_2 + informal, data = GEIH)
 rec5
 
 rec6<- recipe(log_salario_m~., data = GEIH) %>%
@@ -50,12 +50,12 @@ rec6<- recipe(log_salario_m~., data = GEIH) %>%
   step_dummy(all_nominal_predictors()) ##Convierte todas las categoricas a dummy\
 rec6
 
-rec7<- recipe(log_salario_m~secundaria+media+superior+ exp_trab_actual + 
+rec7<- recipe(log_salario_m~secundaria + media + superior + exp_trab_actual + 
                 exp_trab_actual_2, data = GEIH)
 rec7
 
 rec8<- recipe(log_salario_m~edad + edad_2 + mujer + hijos_hogar + mujer_hijos_hogar +
-                mujer_amo_casa + horas_trab_usual+ exp_trab_actual + exp_trab_actual_2, data = GEIH)
+                mujer_amo_casa + horas_trab_usual+ exp_trab_actual + exp_trab_actual_2 + informal, data = GEIH)
 rec8
 
 

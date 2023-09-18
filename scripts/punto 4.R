@@ -3,7 +3,7 @@
 #                      Problem Set 1: Predicting Income                       #
 #                                                                             #
 #-----------------------------------------------------------------------------#
-#   Autores: - Tania Reina                                                   
+#   Autores: -                                                    
 #            -   
 #            - 
 #            - 
@@ -156,7 +156,7 @@ GEIH <- GEIH %>% filter(!is.na(salario_mensual))
 #CUARTO PUNTO##
 #Regresión
 mod3 <- lm(log_salario_m ~ mujer, data = GEIH, x= TRUE)
-stargazer(mod3, type = "text", omit.stat=c("ser","f","adj.rsq"))
+stargazer(mod3, type = "text", omit.stat=c("ser","f","adj.rsq"), out = "C:/Users/carlo/Documents/Out/Regresion 4.1.html")
 
 # Ahora vamos a usar FWL usando como variables condicionales: experiencia de trabajo actual,
 # horas de trabajo usual, oficio y edad.
@@ -173,48 +173,12 @@ GEIHFWL <- GEIHFWL %>% mutate(residualesSalario= lm(log_salario_m~exp_trab_actua
                                                   data= GEIHFWL)$residuals)
 
 modFWL <- lm(residualesSalario ~ residualesMujer, data= GEIHFWL)
-stargazer(mod3, mod4, modFWL, type = "text", omit.stat=c("ser","f","adj.rsq"))
+stargazer(mod3, mod4, modFWL, type = "text", omit.stat=c("ser","f","adj.rsq"), out = "C:/Users/carlo/Documents/Out/Regresion 4.2.html")
+
+stargazer(mod3, mod4, modFWL, type = "html", omit.stat=c("ser","f","adj.rsq"))
 
 
-#####Probando FWL de a una variable condicional:########
 
-# Mujer ~ exp_trab_actual
-prueba1 <- lm(log_salario_m~mujer + exp_trab_actual, data = GEIH)
-
-GEIH3 <- GEIH
-
-GEIH3 <- GEIH3 %>% mutate(residualesMujer1= lm(mujer ~ exp_trab_actual, data= GEIH3)$residuals)
-
-GEIH3 <- GEIH3 %>% mutate(residualesSalario1= lm(log_salario_m~exp_trab_actual, data= GEIH3)$residuals)
-
-regprueba1 <- lm(residualesSalario1 ~ residualesMujer1, data= GEIH3)
-stargazer(prueba1, regprueba1, type = "text", omit.stat=c("ser","f","adj.rsq"))
-
-
-#Mujer ~ horas_trab_usual
-prueba2 <- lm(log_salario_m~mujer + horas_trab_usual, data = GEIH)
-
-GEIH4 <- GEIH
-
-GEIH4 <- GEIH4 %>% mutate(residualesMujer2= lm(mujer ~ horas_trab_usual, data= GEIH3)$residuals)
-
-GEIH4 <- GEIH4 %>% mutate(residualesSalario2= lm(log_salario_m~horas_trab_usual, data= GEIH3)$residuals)
-
-regprueba2 <- lm(residualesSalario2 ~ residualesMujer2, data= GEIH4)
-stargazer(prueba2, regprueba2, type = "text", omit.stat=c("ser","f","adj.rsq"))
-
-
-#Mujer ~ oficio
-prueba3 <- lm(log_salario_m~mujer + oficio, data = GEIH)
-
-GEIH5 <- GEIH
-
-GEIH5 <- GEIH5 %>% mutate(residualesMujer3= lm(mujer ~ oficio, data= GEIH5)$residuals)
-
-GEIH5 <- GEIH5 %>% mutate(residualesSalario3= lm(log_salario_m~oficio, data= GEIH5)$residuals)
-
-regprueba3 <- lm(residualesSalario3 ~ residualesMujer3, data= GEIH5)
-stargazer(prueba3, regprueba3, type = "text", omit.stat=c("ser","f","adj.rsq"))
 
 ####################################################################################
 
@@ -245,7 +209,7 @@ for(i in 1:B){
 length(eta_modFWL)
 
 
-plot(hist(eta_modFWL))
+plot(hist(eta_modFWL), main = "", breaks = 20)
 
 #El valor máximo predicho:
 mean(eta_modFWL)
@@ -261,14 +225,6 @@ quantile(eta_modFWL,c(0.05,0.95))
 z <- quantile(eta_modFWL,c(0.05,0.95))
 y <- data.frame(id=names(z), values=unname(z), stringsAsFactors=FALSE)
 y
-
-##Exportar Intervalo de Confianza
-print(xtable(y), type = "html")
-
-
-
-
-
 
 
 

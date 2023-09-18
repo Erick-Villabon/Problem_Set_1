@@ -3,15 +3,16 @@
 #                      Problem Set 1: Predicting Income                       #
 #                                                                             #
 #-----------------------------------------------------------------------------#
-#   Autores: - Tania Reina 202015300                                                    
-#            -   
-#            - 
-#            - 
+#   Autores: -  Erick Julian Villabon - 201815677                                                  
+#            -  Juan Diego Duarte - 202011999  
+#            -  Carlos Torres Sandoval - 202225155
+#            -  Tania Reina - 202015300 
 #
 #  Fecha: 18/09/2023 
 #
 #  Objetivo: Este código busca cargar los datos, para así proceder a limpiarlos
 #  y realizar las gráficas descriptivas de la base final.
+#Punto 2
 #-----------------------------------------------------------------------------#
 
 # Limpiar el environment y el panel

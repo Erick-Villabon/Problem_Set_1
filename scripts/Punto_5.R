@@ -3,16 +3,17 @@
 #                      Problem Set 1: Predicting Income                       #
 #                                                                             #
 #-----------------------------------------------------------------------------#
-#   Autores: - Tania Reina                                                   
-#            -   
-#            - 
-#            - 
+#   Autores: -  Erick Julian Villabon - 201815677                                                  
+#            -  Juan Diego Duarte - 202011999  
+#            -  Carlos Torres Sandoval - 202225155
+#            -  Tania Reina - 202015300 
 #
 #  Fecha: 18/09/2023 
 #
-# Punto 5
+#Punto 5
 
 ##Mantenemos ewnviorenment de puntos anteriores (2,3,4)
+
 p_load() ##Cargamos librerias adicionales
 
 ### Establecemos una semilla

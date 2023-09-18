@@ -13,8 +13,8 @@
 #Punto 5
 
 ##Mantenemos ewnviorenment de puntos anteriores (2,3,4)
-
-p_load() ##Cargamos librerias adicionales
+library(pacman)
+p_load(rvest, tidyverse, ggplot2, robotstxt, psych, stargazer, ggthemes, data.table , openxlsx , grid)
 
 ### Establecemos una semilla
 set.seed(10101)
@@ -26,6 +26,10 @@ data_split
 ##Creamos el testing y el training
 train<-training(data_split)
 test<-testing(data_split)
+
+#Creamos variables de interacción
+GEIH$mujer_hijos_hogar <- GEIH$mujer * GEIH$hijos_hogar
+GEIH$ mujer_amo_casa <- GEIH$mujer * GEIH$amo_casa 
 
 ###Creamos los recipes y work flows para automatizar el trabajo , por ahora con variables de prueba
 rec1<- recipe(log_salario_m ~ edad+edad_2, data=GEIH)

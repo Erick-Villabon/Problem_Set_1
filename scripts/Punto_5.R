@@ -12,7 +12,7 @@
 #
 #Punto 5
 
-##Mantenemos ewnviorenment de puntos anteriores (2,3,4)
+##Mantenemos enviorenment de puntos anteriores (2,3,4)
 library(pacman)
 p_load(rvest, tidyverse, ggplot2, robotstxt, psych, stargazer, ggthemes, data.table , openxlsx , grid)
 

@@ -48,7 +48,7 @@ rec5
 
 rec6<- recipe(log_salario_m~., data = GEIH) %>%
   step_rm(ciudad)%>%
-  step_dummy(all_nominal_predictors()) ##Convierte todas las categoricas a dummy\
+  step_dummy(all_nominal_predictors()) ##Convierte todas las categoricas a dummy/
 rec6
 
 rec7<- recipe(log_salario_m~secundaria + media + superior + exp_trab_actual + 
@@ -100,10 +100,19 @@ wf8 <- workflow() %>%
 ##WORK FLOW  1
 wage_pred1 <-wf1 %>%
   fit(data=train)
+stargazer(wage_pred1, type="html", omit.stat=c("ser","f","adj.rsq"), out= "C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/WF1.html")
+
 ##Predict 
 test_pred1.1<- predict(wage_pred1, new_data = test)%>%
   bind_cols(test)
-
+##Hacemos histogramas de los errores 
+errores1 <- test_pred1.1$log_salario_m - test_pred1.1$.pred
+ggplot(data = data.frame(errores1), aes(x = errores1)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(title = "Distribución de Errores de Predicción WF1",
+       x = "Errores de Predicción",
+       y = "Frecuencia")
+ggsave("C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/RMSEWF1.png", width = 4.5, height = 2.5, dpi = 600)
 
 ##Creamos un vector para guardar los RMSE 
 RMSEs_<- c()
@@ -112,11 +121,20 @@ test_rmse1.1<-rmse(test_pred1.1, truth = log_salario_m, estimate = .pred)
 test_rmse1.1$.estimate ##Muestra el RMSE
 resultado<-test_rmse1.1$.estimate ##Almacena el RMSE 
 RMSEs_<-c(RMSEs_,resultado) ##Lo anade al vector de RMSE
+
 ##WORK FLOW 2
 wage_pred2 <-wf2 %>%
   fit(data=train)
 test_pred1.2<- predict(wage_pred2, new_data = test)%>%
   bind_cols(test)
+
+errores2 <- test_pred1.2$log_salario_m - test_pred1.2$.pred
+ggplot(data = data.frame(errores2), aes(x = errores2)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(title = "Distribución de Errores de Predicción WF2",
+       x = "Errores de Predicción",
+       y = "Frecuencia")
+ggsave("C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/RMSEWF2.png", width = 4.5, height = 2.5, dpi = 600)
 test_rmse1.1<-rmse(test_pred1.2, truth = log_salario_m, estimate = .pred)
 resultado<-test_rmse1.1$.estimate 
 RMSEs_<-c(RMSEs_,resultado)
@@ -126,15 +144,33 @@ wage_pred3 <-wf3 %>%
   fit(data=train)
 test_pred1.3<- predict(wage_pred3, new_data = test)%>%
   bind_cols(test)
+
+errores3 <- test_pred1.3$log_salario_m - test_pred1.3$.pred
+ggplot(data = data.frame(errores3), aes(x = errores3)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(title = "Distribución de Errores de Predicción WF3",
+       x = "Errores de Predicción",
+       y = "Frecuencia")
+ggsave("C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/RMSEWF3.png", width = 4.5, height = 2.5, dpi = 600)
+
 test_rmse1.3<-rmse(test_pred1.3, truth = log_salario_m, estimate = .pred)
 resultado<-test_rmse1.3$.estimate 
 RMSEs_<-c(RMSEs_,resultado)
+
 
 ##WORK FLOW 4
 wage_pred4 <-wf4 %>%
   fit(data=train)
 test_pred1.4<- predict(wage_pred4, new_data = test)%>%
   bind_cols(test)
+
+errores4 <- test_pred1.2$log_salario_m - test_pred1.2$.pred
+ggplot(data = data.frame(errores2), aes(x = errores2)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(title = "Distribución de Errores de Predicción WF2",
+       x = "Errores de Predicción",
+       y = "Frecuencia")
+ggsave("C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/RMSEWF4.png", width = 4.5, height = 2.5, dpi = 600)
 test_rmse1.4<-rmse(test_pred1.4, truth = log_salario_m, estimate = .pred)
 resultado<-test_rmse1.4$.estimate
 RMSEs_<-c(RMSEs_,resultado)
@@ -145,6 +181,15 @@ wage_pred5 <-wf5 %>%
   fit(data=train)
 test_pred1.5<- predict(wage_pred5, new_data = test)%>%
   bind_cols(test)
+
+errores5 <- test_pred1.5$log_salario_m - test_pred1.5$.pred
+ggplot(data = data.frame(errores5), aes(x = errores5)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(title = "Distribución de Errores de Predicción WF5",
+       x = "Errores de Predicción",
+       y = "Frecuencia")
+ggsave("C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/RMSEWF5.png", width = 4.5, height = 2.5, dpi = 600)
+
 test_rmse1.5<-rmse(test_pred1.5, truth = log_salario_m, estimate = .pred)
 resultado<-test_rmse1.5$.estimate
 RMSEs_<-c(RMSEs_,resultado)
@@ -155,6 +200,15 @@ wage_pred6 <-wf6 %>%
   fit(data=train)
 test_pred1.6<- predict(wage_pred6, new_data = test)%>%
   bind_cols(test)
+
+errores6 <- test_pred1.2$log_salario_m - test_pred1.2$.pred
+ggplot(data = data.frame(errores2), aes(x = errores2)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(title = "Distribución de Errores de Predicción WF2",
+       x = "Errores de Predicción",
+       y = "Frecuencia")
+ggsave("C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/RMSEWF6.png", width = 4.5, height = 2.5, dpi = 600)
+
 test_rmse1.6<-rmse(test_pred1.6, truth = log_salario_m, estimate = .pred)
 resultado<-test_rmse1.6$.estimate
 RMSEs_<-c(RMSEs_,resultado)
@@ -164,6 +218,15 @@ wage_pred7 <-wf7 %>%
   fit(data=train)
 test_pred1.7<- predict(wage_pred7, new_data = test)%>%
   bind_cols(test)
+
+errores7 <- test_pred1.7$log_salario_m - test_pred1.7$.pred
+ggplot(data = data.frame(errores7), aes(x = errores7)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(title = "Distribución de Errores de Predicción WF7",
+       x = "Errores de Predicción",
+       y = "Frecuencia")
+ggsave("C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/RMSEWF7.png", width = 4.5, height = 2.5, dpi = 600)
+
 test_rmse1.7<-rmse(test_pred1.7, truth = log_salario_m, estimate = .pred)
 resultado<-test_rmse1.7$.estimate
 RMSEs_<-c(RMSEs_,resultado)
@@ -173,6 +236,15 @@ wage_pred8 <-wf8 %>%
   fit(data=train)
 test_pred1.8<- predict(wage_pred8, new_data = test)%>%
   bind_cols(test)
+
+errores8 <- test_pred1.8$log_salario_m - test_pred1.8$.pred
+ggplot(data = data.frame(errores8), aes(x = errores8)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(title = "Distribución de Errores de Predicción WF8",
+       x = "Errores de Predicción",
+       y = "Frecuencia")
+ggsave("C:/Users/tania/OneDrive - Universidad de los Andes/Documentos/Universidad/8. Octavo semestre/Big Data y Machine Learning/Talleres/Taller 1/Problem_Set_1/views/RMSEWF8.png", width = 4.5, height = 2.5, dpi = 600)
+
 test_rmse1.8<-rmse(test_pred1.8, truth = log_salario_m, estimate = .pred)
 resultado<-test_rmse1.8$.estimate
 RMSEs_<-c(RMSEs_,resultado)

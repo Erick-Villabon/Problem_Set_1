@@ -88,8 +88,7 @@ GEIH$hijos_hogar[GEIH$p6050 != 3] <- 0
 GEIH$hijos_hogar[GEIH$p6050 == "."] <- NA
 
 # Interacciones
-GEIH$mujer_hijos_hogar<- GEIH$mujer*GEIH$hijos_hogar
-GEIH$mujer_amo_casa<- GEIH$mujer*GEIH$amo_casa
+a
 # Primaria
 
 GEIH$primaria <- ifelse(GEIH$p6210 == 1, 1, 0)
@@ -200,4 +199,5 @@ ggplot(GEIH, aes(x = salario_mensual)) +
     panel.grid = element_blank()
     )
 ggsave("C:/Users/Erick/Desktop/Problem_Set_1/views/grafico1.png", width = 4.5, height = 2.5, dpi = 600)
+
 
